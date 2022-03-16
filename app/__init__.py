@@ -5,9 +5,8 @@ Application factory
 """
 import os
 
-from flask import Flask
-
 import admin
+from flask import Flask
 
 
 def init_app() -> Flask:
@@ -16,8 +15,9 @@ def init_app() -> Flask:
     :return:
     """
     from app import api
-    from app.api import routes
     from app import models
+    from app.api import routes
+
     app = Flask(__name__)
     models.init_app(app)
     routes.init_app(app)
@@ -34,14 +34,14 @@ def create_app(config=None):
     """
     app = init_app()
     # load default configuration
-    app.config.from_object('config.settings')
+    app.config.from_object("config.settings")
     # load environment configuration
-    if 'FLASK_CONF' in os.environ:
-        app.config.from_envvar('FLASK_CONF')
+    if "FLASK_CONF" in os.environ:
+        app.config.from_envvar("FLASK_CONF")
     # load app specified configuration
     if config is not None:
         if isinstance(config, dict):
             app.config.update(config)
-        elif config.endswith('.py'):
+        elif config.endswith(".py"):
             app.config.from_pyfile(config)
     return app

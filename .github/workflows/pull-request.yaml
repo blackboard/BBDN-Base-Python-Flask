@@ -101,7 +101,7 @@ jobs:
       - name: Cache
         uses: actions/cache@v2
         with:
-          path: ~/.cache/pre-commit
+          path: ~/.cache/pre-/Users/ejimenez/work/BBDN-Base-Python-Flask/.github
           key: pre-commit|${{ env.PY }}|${{ hashFiles('.pre-commit-config.yaml') }}
 
       - name: PreCommit

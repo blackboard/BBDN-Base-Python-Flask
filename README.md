@@ -4,7 +4,8 @@
 
 ### Install
 
-We recommend the use of our [Taskfile](https://github.com/adriancooney/taskfile) to simplify the use 
+We recommend the use of our [Taskfile](https://github.com/adriancooney/taskfile) to simplify the use
+
 ```
 use the
 
@@ -12,6 +13,7 @@ pip install -r pip-requirements.txt
 ```
 
 ### Setup
+
 ```
 source venv/bin/activate
 
@@ -41,4 +43,20 @@ To build the docker image run the following command on the root folder
 
 ```
 docker build . -f docker/Dockerfile -t <name-for-container>
+```
+
+### MKDocs
+
+We suggest the use of [Mkdocs](https://www.mkdocs.org/getting-started/) for documentation.
+
+#### Install
+
+```
+pip install mkdocs
+```
+
+#### Serve
+
+```
+mkdocs serve
 ```
