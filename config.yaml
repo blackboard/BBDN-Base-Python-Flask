@@ -1,0 +1,152 @@
+local:
+  us-east-1:
+    monitoring:
+      enable: false
+      runbook_url: https://whatever.com
+      warning_alarms_pager_duty_url: https://whatever.com
+      critical_alarms_pager_duty_url: https://whatever.com
+    canary_deployment:
+      enable: false
+      type: allAtOnce
+    run_acceptance_tests: true
+    cloudfront:
+      enabled: false
+      domain:
+        name: jwt-signing.bb-foundations.com
+        zone_id: Z0160877PYQMV6924FP9
+    jwt:
+      token_expiration_sec: 3600
+      # the URL where lambda authorizer makes calls to verify the token/get jwks.json file
+      # must be listed as a "trusted issuer" in authorizer config
+      issuer_url: https://local.jwt-signing.bb-foundations.com
+
+dev:
+  us-east-1:
+    seed_data_location: s3://fnds-jwt-signing-data/jwt-signin-playground/Site.bson
+    metastore_key_arn: arn:aws:kms:us-east-1:445207432332:key/3fcd36d4-3a57-4a13-b097-fee573b65560
+    data_decrypt_key_secret_arn: arn:aws:secretsmanager:us-east-1:445207432332:secret:fnds-registrar-data-decrypt-key-dev-p7wyGu
+    monitoring:
+      enable: true
+      runbook_url: https://whatever.com
+      warning_alarms_pager_duty_url: https://whatever.com
+      critical_alarms_pager_duty_url: https://whatever.com
+    canary_deployment:
+      enable: true
+      type: allAtOnce
+    run_acceptance_tests: true
+    cloudfront:
+      enabled: true
+      domain:
+        name: dev.registrar.bb-foundations.com
+        zone_id: Z072694737EFIGAWNG5EQ
+    jwt:
+      token_expiration_sec: 3600
+      always_use_jwks: true
+      jwk_secret_arn: arn:aws:secretsmanager:us-east-1:445207432332:secret:fnds-registrar-jwk-dev-ROyg6z
+      issuer_url: https://dev.registrar.bb-foundations.com
+    site_creation_timeout_sec: 300
+    key_exchange_secret_arn: arn:aws:secretsmanager:us-east-1:445207432332:secret:fnds-registrar-exchange-pk-dev-bN0SeK
+    reject_host_url_pattern: ""
+    trusted_sites_seed_secret_arn: arn:aws:secretsmanager:us-east-1:445207432332:secret:fnds-registrar-trusted-sites-seed-dev-XkAd0A
+int:
+  us-east-1:
+    seed_data_location: s3://fnds-registrar-data/registrar-blue-next/Site.bson
+    metastore_key_arn: arn:aws:kms:us-east-1:445207432332:key/49206346-6761-427d-abfe-90e096b85548
+    data_decrypt_key_secret_arn: arn:aws:secretsmanager:us-east-1:445207432332:secret:fnds-registrar-data-decrypt-key-dev-p7wyGu # the same as for dev
+    monitoring:
+      enable: false
+      runbook_url: https://whatever.com
+      warning_alarms_pager_duty_url: https://whatever.com
+      critical_alarms_pager_duty_url: https://whatever.com
+    canary_deployment:
+      enable: true
+      type: allAtOnce
+    run_acceptance_tests: true
+    cloudfront:
+      enabled: true
+      domain:
+        name: int.registrar.bb-foundations.com
+        zone_id: Z05277361WAXE2WAALFRJ
+      proxy:
+        enabled: false
+        record_requests: false
+        new_impl_traffic_ratio: 100 # percent of traffic going to the new implementation (GET request only so far)
+        outer_domain: int.registrar.bb-foundations.com # domain original requests go to
+        registrar_legacy_url: https://registrar-blue-next.cloudbb.blackboard.com
+    jwt:
+      token_expiration_sec: 3600
+      always_use_jwks: true
+      jwk_secret_arn: arn:aws:secretsmanager:us-east-1:445207432332:secret:fnds-registrar-jwk-int-DHjzTr
+      issuer_url: https://int.registrar.bb-foundations.com
+    site_creation_timeout_sec: 300
+    key_exchange_secret_arn: arn:aws:secretsmanager:us-east-1:445207432332:secret:fnds-registrar-exchange-pk-dev-bN0SeK # the same as for dev
+    reject_host_url_pattern: ""
+    trusted_sites_seed_secret_arn: arn:aws:secretsmanager:us-east-1:445207432332:secret:fnds-registrar-trusted-sites-seed-int-TjqiwH
+tp:
+  us-east-1:
+    seed_data_location: ""
+    metastore_key_arn: ""
+    data_decrypt_key_secret_arn: ""
+    monitoring:
+      enable: true
+      runbook_url: https://whatever.com
+      warning_alarms_pager_duty_url: https://whatever.com
+      critical_alarms_pager_duty_url: https://whatever.com
+    canary_deployment:
+      enable: false
+      type: allAtOnce
+    run_acceptance_tests: false
+    cloudfront:
+      enabled: false
+      domain:
+        name: tp.registrar.bb-foundations.com
+        zone_id:
+      proxy:
+        enabled: false
+        record_requests: true
+        new_impl_traffic_ratio: 50 # percent of traffic going to the new implementation (GET request only so far)
+        outer_domain: tp.registrar.bb-foundations.com
+        registrar_legacy_url: ""
+    jwt:
+      token_expiration_sec: 3600
+      always_use_jwks: false
+      jwk_secret_arn: ""
+      issuer_url: https://tp.registrar.bb-foundations.com
+    site_creation_timeout_sec: 300
+    key_exchange_secret_arn: ""
+    reject_host_url_pattern: ""
+    trusted_sites_seed_secret_arn: ""
+prod:
+  us-east-1:
+    seed_data_location: ""
+    metastore_key_arn: ""
+    data_decrypt_key_secret_arn: ""
+    monitoring:
+      enable: true
+      runbook_url: https://whatever.com
+      warning_alarms_pager_duty_url: https://whatever.com
+      critical_alarms_pager_duty_url: https://whatever.com
+    canary_deployment:
+      enable: false
+      type: allAtOnce
+    run_acceptance_tests: false
+    cloudfront:
+      enabled: false
+      domain:
+        name: registrar.api.blackboard.com
+        zone_id:
+      proxy:
+        enabled: false
+        record_requests: true
+        new_impl_traffic_ratio: 10 # percent of traffic going to the new implementation (GET request only so far)
+        outer_domain: registrar.api.blackboard.com
+        registrar_legacy_url: ""
+    jwt:
+      token_expiration_sec: 3600
+      always_use_jwks: false
+      jwk_secret_arn: ""
+      issuer_url: https://registrar.api.blackboard.com
+    site_creation_timeout_sec: 300
+    key_exchange_secret_arn: ""
+    reject_host_url_pattern: ""
+    trusted_sites_seed_secret_arn: ""

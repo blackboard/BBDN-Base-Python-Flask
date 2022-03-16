@@ -1,0 +1,19 @@
+#
+#  Note that requirements from layer/*/ and lambdas/*/ are included
+#  automatically (as long as you update dependencies with `make deps`)
+#
+#  Conflicting versions pinned in any of the above will fail `make deps`
+#  and must be resolved before pushing updated dependencies to the repository
+#
+
+flask
+flask_restful
+Flask-Caching
+redis
+sqlalchemy
+PyLTI1p3
+gunicorn
+boto3
+
+# CDK Libraries
+aws-cdk.core<2
