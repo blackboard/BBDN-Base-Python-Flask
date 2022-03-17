@@ -1,24 +1,14 @@
-# Base Python project
+# Base Template Python project
+
+This is a template repository with the essentials to build a Python project using Flask.
 
 ## HOW TO
 
 ### Install
 
-We recommend the use of our [Taskfile](https://github.com/adriancooney/taskfile) to simplify the use
+We recommend the use of our [Taskfile](https://github.com/adriancooney/taskfile)
 
-```
-use the
-
-pip install -r pip-requirements.txt
-```
-
-### Setup
-
-```
-source venv/bin/activate
-
-export PYTHONPATH='<path to project>/BBDN-LTI-Tool-Provider-Python/app'
-```
+You can check the [Contributing](.github/contributing.md)
 
 ### Run
 
@@ -59,4 +49,14 @@ pip install mkdocs
 
 ```
 mkdocs serve
+```
+
+#### Pre-commit hooks
+
+This project has a set of hooks for [pre-commit](https://pre-commit.com/) for formatting.
+
+To install this hooks into your repo, run.
+
+```
+pre-commit install
 ```
