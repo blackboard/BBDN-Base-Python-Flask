@@ -18,12 +18,12 @@ def init_app() -> Flask:
     from app import models
     from app.api import routes
 
-    app = Flask(__name__)
-    models.init_app(app)
-    routes.init_app(app)
-    api.init_app(app)
-    admin.init_app(app)
-    return app
+    application = Flask(__name__)
+    models.init_app(application)
+    routes.init_app(application)
+    api.init_app(application)
+    admin.init_app(application)
+    return application
 
 
 def create_app(config=None):
@@ -32,16 +32,16 @@ def create_app(config=None):
     :param config:
     :return:
     """
-    app = init_app()
+    application = init_app()
     # load default configuration
-    app.config.from_object("config.settings")
+    application.config.from_object("config.settings")
     # load environment configuration
     if "FLASK_CONF" in os.environ:
-        app.config.from_envvar("FLASK_CONF")
+        application.config.from_envvar("FLASK_CONF")
     # load app specified configuration
     if config is not None:
         if isinstance(config, dict):
-            app.config.update(config)
+            application.config.update(config)
         elif config.endswith(".py"):
-            app.config.from_pyfile(config)
-    return app
+            application.config.from_pyfile(config)
+    return application
