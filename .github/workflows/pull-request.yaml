@@ -99,7 +99,7 @@ jobs:
         run: pip install pre-commit
 
       - name: Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.cache/pre-/Users/ejimenez/work/BBDN-Base-Python-Flask/.github
           key: pre-commit|${{ env.PY }}|${{ hashFiles('.pre-commit-config.yaml') }}
